@@ -1,0 +1,43 @@
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+/* @import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss"; */
+
+// Core variables and mixins
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_variables";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_mixins";
+// Reset
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_normalize";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_print";
+// Core CSS
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_scaffolding";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_type";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_code";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_grid";
+
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_forms";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_buttons";
+
+// Components: Nav
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_navs";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_navbar";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_button-groups";
+
+// Components: Popovers
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_modals";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_tooltip";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_popovers";
+
+// Components: Misc
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_alerts";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_thumbnails";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_media";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_labels";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_badges";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_progress-bars";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_carousel";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_jumbotron";
+
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_pagination";
+
+// Utility classes
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_utilities"; // Has to be last to override when necessary
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_responsive-utilities";

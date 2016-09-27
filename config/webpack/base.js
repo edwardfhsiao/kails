@@ -43,12 +43,8 @@ module.exports = {
       loader: 'url-loader?limit=8192&name=[name].[ext]'
     },
     {
-      test: /\.css$/,
-      loader: ExtractTextPlugin.extract("style", "css!postcss")
-    },
-    {
-      test: /\.scss$/,
-      loader: ExtractTextPlugin.extract('style', 'css!sass')
+        test: /\.(css|scss|sass)$/,
+        loader: ExtractTextPlugin.extract('style-loader', ['css-loader', 'postcss-loader', 'sass-loader'])
     }]
   },
   resolve: {

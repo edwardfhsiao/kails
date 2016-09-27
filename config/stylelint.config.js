@@ -20,6 +20,7 @@ module.exports = {
     'unit-whitelist': ['em', 'rem', '%', 's', 'ms', 'px', 'deg', 'vw', 'vh', 'dpi', 'dppx'],
     'selector-combinator-space-after': null,
     'selector-pseudo-element-colon-notation': null,
-    'selector-list-comma-newline-after': null
+    'selector-list-comma-newline-after': null,
+    'rule-non-nested-empty-line-before': null
   }
 };

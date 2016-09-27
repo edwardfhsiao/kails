@@ -1,3 +1,4 @@
+@import "./bootstrap_base_components.scss";
 @import "reset.css";
 @import "application.css";
 @import "article.css";

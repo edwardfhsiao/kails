@@ -1,1 +1,3 @@
 node_modules/
+app/assets/stylesheets/bootstrap_base_components.scss
+app/assets/stylesheets/base.css

@@ -1,3 +1,4 @@
+
 html {
   position: relative;
   min-height: 100%;
@@ -16,12 +17,18 @@ body {
   background-color: #42b983;
 }
 
-h1, .h1,
-h2, .h2,
-h3, .h3,
-h4, .h4,
-h5, .h5,
-h6, .h6 {
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
   margin-top: 0;
   font-weight: bold;
   color: #34495e;
@@ -31,7 +38,9 @@ h1 {
   font-size: 2em;
 }
 
-a, a:active, a:hover {
+a,
+a:active,
+a:hover {
   position: relative;
   color: #2c3e50;
   text-decoration: none;
@@ -226,21 +235,17 @@ a:hover:after {
   .container {
     width: 710px;
   }
-
   .navbar .container {
     min-height: 110px;
   }
-
   .navbar-container {
     text-align: left;
   }
-
   .navbar .navbar-header {
     float: left;
     text-align: left;
     margin-right: 20px;
   }
-
   .navbar .navbar-nav.navbar-right {
     float: right;
     text-align: left;
