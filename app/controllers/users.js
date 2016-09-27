@@ -1,8 +1,8 @@
 import models from '../models/index';
 
-function index(ctx, _next) {
+const index = (ctx, _next) => {
   ctx.body = 'this a users response!' + ctx.session.userId;
-}
+};
 
 function setLocals(message) {
   return {
@@ -11,7 +11,7 @@ function setLocals(message) {
   };
 }
 
-async function signIn(ctx, _next) {
+const signIn = async (ctx, _next) => {
   if(ctx.state.isUserSignIn){
     ctx.redirect('/');
     return;
@@ -20,18 +20,18 @@ async function signIn(ctx, _next) {
     nav: 'signIn'
   };
   await ctx.render('users/signIn', locals);
-}
+};
 
-function LogOut(ctx, _next) {
+const LogOut = (ctx, _next) => {
   if(!ctx.state.isUserSignIn){
     ctx.redirect('/');
     return;
   }
   ctx.session.userId = null;
   ctx.redirect('/');
-}
+};
 
-async function LogIn(ctx, _next) {
+const LogIn = async (ctx, _next) => {
   const body = ctx.request.body;
   if (!(body.email && body.password)) {
     const locals = setLocals('params error.');
@@ -47,11 +47,11 @@ async function LogIn(ctx, _next) {
     const locals = setLocals('user name or password error.');
     await ctx.render('users/signIn', locals);
   }
-}
+};
 
 export default {
-  index: index,
-  signIn: signIn,
-  LogIn: LogIn,
-  LogOut: LogOut
+  index,
+  signIn,
+  LogIn,
+  LogOut
 };

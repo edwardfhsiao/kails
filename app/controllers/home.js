@@ -5,7 +5,7 @@ import Articles from '../assets/javascripts/components/articles.jsx';
 import { markdown } from '../helpers/markdown';
 import fs from 'fs';
 
-async function index(ctx, _next) {
+const index = async (ctx, _next) => {
   let page = parseInt(ctx.query.page, 10) || 1;
   page = page > 0 ? page : 1;
   let pageOffset = ( page - 1 ) * 10;
@@ -34,9 +34,9 @@ async function index(ctx, _next) {
     pages: parseInt(articleCount / 10 + 1)
   };
   await ctx.render('home/index', locals);
-}
+};
 
-async function about(ctx, _next) {
+const about = async (ctx, _next) => {
   const readme = fs.readFileSync('README.md', 'utf8');
   const locals = {
     title: 'About',
@@ -45,9 +45,9 @@ async function about(ctx, _next) {
     markdown: markdown
   };
   await ctx.render('home/about', locals);
-}
+};
 
 export default {
-  index: index,
-  about: about
+  index,
+  about
 };
