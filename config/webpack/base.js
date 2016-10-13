@@ -6,8 +6,8 @@ const assetHost = require('../config').assetHost;
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const stylelint = require('stylelint');
 const postcssImport = require('postcss-import');
-const cssnext = require('postcss-cssnext');
-const postcssReporter = require("postcss-reporter");
+// const cssnext = require('postcss-cssnext');
+const postcssReporter = require('postcss-reporter');
 
 module.exports = {
   context: path.resolve(__dirname, '../', '../'),
@@ -19,7 +19,7 @@ module.exports = {
   module: {
     preLoaders: [{
       test: /\.js$/,
-      loader: "eslint-loader",
+      loader: 'eslint-loader',
       exclude: /node_modules/
     }],
     loaders: [{
@@ -43,8 +43,12 @@ module.exports = {
       loader: 'url-loader?limit=8192&name=[name].[ext]'
     },
     {
-        test: /\.(css|scss|sass)$/,
-        loader: ExtractTextPlugin.extract('style-loader', ['css-loader', 'postcss-loader', 'sass-loader'])
+      test: /\.css$/,
+      loader: ExtractTextPlugin.extract('style', 'css!postcss')
+    },
+    {
+      test: /\.scss$/,
+      loader: ExtractTextPlugin.extract('style', 'css!sass')
     }]
   },
   resolve: {
@@ -81,6 +85,6 @@ module.exports = {
 
       // cssnext({autoprefixer: {browsers: "ie >= 9, ..."}}),
       postcssReporter({clearMessages: true})
-    ]
+    ];
   }
 };
