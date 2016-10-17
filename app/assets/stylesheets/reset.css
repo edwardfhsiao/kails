@@ -1,7 +1,31 @@
-button {
-  transition: all 0.45s;
+html body a {
+  color: #4a4a4a;
 }
 
-* {
-  outline: none !important;
+html body a:hover {
+  color: #4a4a4a;
+  text-decoration: none;
+}
+
+html body a:focus {
+  color: #4a4a4a;
+  text-decoration: none;
+}
+
+html body input:focus {
+  outline: none!important;
+}
+
+.form-control:focus {
+  border-color: none!important;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0), 0 0 8px rgba(102, 175, 233, 0)!important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0), 0 0 8px rgba(102, 175, 233, 0)!important;
+}
+
+.input-group {
+  z-index: 0!important;
+}
+
+.input-group input {
+  z-index: 0!important;
 }

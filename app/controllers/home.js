@@ -1,7 +1,7 @@
 import models from '../models/index';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import Articles from '../assets/javascripts/components/articles.jsx';
+// import Index from '../assets/javascripts/index.js';
 import { markdown } from '../helpers/markdown';
 import fs from 'fs';
 
@@ -20,14 +20,14 @@ const index = async (ctx, _next) => {
     offset: pageOffset,
     limit: 10
   });
-  const prerenderHtml = await renderToString(
-    <Articles articles={ articles } />
-  );
+  // const prerenderHtml = await renderToString(
+  //   <Index articles={ articles } />
+  // );
   // ctx.session.userId = 4
   const locals = {
     title: 'Home',
     nav: 'index',
-    prerenderHtml: prerenderHtml,
+    prerenderHtml: '',
     preloadedState: { articles: articles },
     baseUrl: '/',
     currentPage: page,

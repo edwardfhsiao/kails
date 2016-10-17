@@ -1,0 +1,23 @@
+.index-intro {
+  position: relative;
+  background: url('../images/jumbotron.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 500px;
+  overflow: hidden;
+}
+
+.index-intro__header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff
+}
+
+@media only screen and (max-width: 790px) {
+  .index-intro {
+    height: 200px;
+  }
+}

@@ -4,54 +4,66 @@ html
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     meta(name="viewport" content="width=device-width, initial-scale=1")
-    meta(name="description" content=(description || "Kails Blog"))
-    meta(name="author" content=(author || "Embbnux"))
+    meta(name="description" content=(description || "Edward Xiao"))
+    meta(name="author" content=(author || "Edward Xiao"))
     title
-      = title || 'Home'
-      = ' | Kails'
+      = title || 'Edward Xiao'
+      = ' | Edward Xiao'
     link(rel='stylesheet' href=helpers.assetUrl('application.css'))
     block dynamicCss
-    link(href="/favicon.png" rel="shortcut icon" type="image/png")
+    link(href="/logo.ico" rel="icon" type="image/x-icon")
     meta(name="csrf-param" content="_csrf")
     meta(name="csrf-token" content=csrf)
   body
-    .navbar
-      .container
-        .navbar-header
-          a.nav-logo(href="/") K
-          a.nav-name(href="/") Kails
-        .navbar-container
-          ul.nav.navbar-nav.navbar-menu
-            li
-              a.nav-item(class=helpers.isActive('index', nav) href="/") Home
-            li
-              a.nav-item(class=helpers.isActive('news', nav) href="/news") News
-            li
-              a.nav-item(class=helpers.isActive('about', nav) href="/about") About
-          ul.nav.navbar-nav.navbar-right
-            - if(!isUserSignIn)
-              li
-                a.nav-item(class=helpers.isActive('signIn', nav) href="/users/sign_in") SignIn
-            - else
-              li(class="dropdown")
-                a.nav-item.dropdown-toggle(href="#" data-toggle="dropdown")
-                  = currentUser.name
-                  b(class="caret")
-                ul(class="dropdown-menu user-menu")
-                  li
-                    a(href="/articles/new") New Article
-                  li
-                    a(href="/users/logout") Logout
-            //- li
-            //-   a.nav-item(class=isActive('signUp', nav) href="/users/sign_up") SignUp
-    .container
+    .mo-navbar__nav-mobile.mo-nav-mobile(role='navigation')
+      .mo-nav-mobile__mask
+      .mo-nav-mobile__content
+        .mo-nav-mobile__menu-wrapper
+          ul.mo-nav-mobile__menu.mo-nav-mobile-menu
+            li.mo-nav-mobile-menu__item
+              a.mo-nav-mobile-menu__link(href='/', rel='nofollow')
+                | Home
+    #mo-navbar.mo-navbar
+      .mo-navbar__container
+        span.show-mobile.mdi-icon.mdi-edwardxiao.white.mobile-menu-icon
+        a.mo-navbar__brand(href='#')
+          span.mdi-icon.mdi-edwardxiao.main-logo.white.no-mobile
+          span.show-mobile.main-logo
+            span.site-name
+              | Edward Xiao
+        .mo-navbar__nav.mo-nav
+          .mo-nav__item.active
+            a.nav-link(href='/')
+              | 首页
+              span.sr-only (current)
+          .mo-nav__item.mo-dropdown
+            a.mo-nav__link(href='/about') 关于我们
+            .mo-dropdown__menu
+              .mo-dropdown__item
+                a(href='#') Action
+              .mo-dropdown__item
+                a(href='#') Another action
+              .mo-dropdown__item
+                a(href='#') Something else here
+              .mo-dropdown__item
+                a(href='#') Separated link
+          .mo-nav__item
+            a.mo-nav__link(class=helpers.isActive('index', nav) href='/') Home
+          .mo-nav__item
+            a.mo-nav__link(class=helpers.isActive('index', nav) href='/news') News
+          .mo-nav__item
+            a.mo-nav__link(class=helpers.isActive('index', nav) href='/about') About
+          - if(!isUserSignIn)
+            .mo-nav__item
+              a.mo-nav__link(class=helpers.isActive('signIn', nav) href='/users/sign_in') SignIn
+          - else
+            .mo-nav__item
+              a.mo-nav__link(class=helpers.isActive('signIn', nav) href='/users/logout') Logout
+    .container.main
       block content
-    footer.footer
-      p
-        | Power By Kail, &nbsp;
-        a(href="https://kails.org") &copy; Kails
-      p
-        a(class="github-button" href="https://github.com/embbnux/kails" data-count-href="/embbnux/kails/stargazers" data-count-api="/repos/embbnux/kails#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star embbnux/kails on GitHub" rel="nofollow") Star
+      .push
+    .footer
+      .container
     script(src=helpers.assetUrl('application.js'))
     script(async defer src="https://buttons.github.io/buttons.js")
     block dynamicJs

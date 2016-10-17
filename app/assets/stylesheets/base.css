@@ -1,5 +1,6 @@
 @import "./bootstrap_base_components.scss";
-@import "reset.css";
-@import "application.css";
-@import "article.css";
-@import "news.css";
+@import "./application.css";
+@import "./my_validator.css";
+@import "./my_message.css";
+@import "./reset.css";
+@import "./icon.css";

@@ -6,11 +6,11 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_mixins";
 // Reset
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_normalize";
-@import "~bootstrap-sass/assets/stylesheets/bootstrap/_print";
+// @import "~bootstrap-sass/assets/stylesheets/bootstrap/_print";
 // Core CSS
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_scaffolding";
-@import "~bootstrap-sass/assets/stylesheets/bootstrap/_type";
-@import "~bootstrap-sass/assets/stylesheets/bootstrap/_code";
+// @import "~bootstrap-sass/assets/stylesheets/bootstrap/_type";
+// @import "~bootstrap-sass/assets/stylesheets/bootstrap/_code";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_grid";
 
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_forms";
@@ -34,10 +34,18 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_badges";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_progress-bars";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_carousel";
-@import "~bootstrap-sass/assets/stylesheets/bootstrap/_jumbotron";
+// @import "~bootstrap-sass/assets/stylesheets/bootstrap/_jumbotron";
 
-@import "~bootstrap-sass/assets/stylesheets/bootstrap/_pagination";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_dropdowns";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_glyphicons";
+
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_input-groups";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_component-animations";
+
+
+// $fa-font-path:  "~font-awesome/fonts" !default;
+// @import "~font-awesome/scss/font-awesome";
 
 // Utility classes
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_utilities"; // Has to be last to override when necessary
-@import "~bootstrap-sass/assets/stylesheets/bootstrap/_responsive-utilities";
+// @import "~bootstrap-sass/assets/stylesheets/bootstrap/_responsive-utilities";

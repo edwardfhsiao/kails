@@ -13,6 +13,7 @@ module.exports = {
   context: path.resolve(__dirname, '../', '../'),
   entry: {
     application: './app/assets/javascripts/application.js',
+    index: './app/assets/javascripts/index.js',
     articles: './app/assets/javascripts/articles.js',
     editor: './app/assets/javascripts/editor.js'
   },
@@ -43,12 +44,8 @@ module.exports = {
       loader: 'url-loader?limit=8192&name=[name].[ext]'
     },
     {
-      test: /\.css$/,
-      loader: ExtractTextPlugin.extract('style', 'css!postcss')
-    },
-    {
-      test: /\.scss$/,
-      loader: ExtractTextPlugin.extract('style', 'css!sass')
+        test: /\.(css|scss|sass)$/,
+        loader: ExtractTextPlugin.extract('style-loader', ['css-loader', 'postcss-loader', 'sass-loader'])
     }]
   },
   resolve: {
@@ -62,7 +59,8 @@ module.exports = {
   plugins: [
     new webpack.ProvidePlugin({
       $: 'jquery',
-      jQuery: 'jquery'
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery'
     }),
     // new webpack.HotModuleReplacementPlugin(),
     new ManifestPlugin({

@@ -1,0 +1,12 @@
+.my-validator-message{
+
+}
+.my-validator-message.my-validator-message--error{
+	color: #a94442;
+}
+.my-validator-message.my-validator-message--success{
+	color: #3c763d;
+}
+.my-validator-message.my-validator-message--warning{
+	color: #8a6d3b;
+}
