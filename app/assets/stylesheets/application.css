@@ -153,6 +153,36 @@ html {
   text-decoration: underline;
 }
 
+.mo-navbar .mo-navbar__users {
+  position: absolute;
+  right: 2%;
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
+}
+
+.mo-navbar .mo-navbar__users .mo-navbar__users-container {
+  display: table;
+}
+
+.mo-navbar .mo-navbar__users .locales-form .form-group {
+  margin-bottom: 0;
+  margin-right: 20px;
+}
+
+.mo-navbar .mo-navbar__users .locales-form .form-control.input-sm {
+  height: 20px;
+}
+
+.mo-navbar .mo-navbar__users .locales-form,
+.mo-navbar .mo-navbar__users .mo-nav__item {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.mo-navbar .mo-navbar__users .mo-nav__item>a {
+  color: #fff;
+}
+
 .mo-navbar.mo-navbar--up {
   height: 50px;
   line-height: 50px;
@@ -268,6 +298,12 @@ html {
 /* end of nav mobile module */
 
 @media only screen and (max-width: 990px) {
+  .mo-navbar .mo-navbar__users .locales-form .form-group {
+    margin-right: 0;
+  }
+  .no-mobile-display {
+    display: none!important;
+  }
   .no-mobile {
     visibility: hidden;
   }
@@ -287,7 +323,7 @@ html {
     top: 50%;
     color: #fff;
   }
-  .mdi-icon.mdi-edwardxiao{
+  .mdi-icon.mdi-edwardxiao {
     font-size: 40px;
     left: 0;
     transform: translate3d(0, -50%, 0) scale3d(1, 1, 1);

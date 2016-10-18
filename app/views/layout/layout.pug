@@ -9,6 +9,7 @@ html
     title
       = title || 'Edward Xiao'
       = ' | Edward Xiao'
+      = locale.words.ss + locale.words.hut
     link(rel='stylesheet' href=helpers.assetUrl('application.css'))
     block dynamicCss
     link(href="/logo.ico" rel="icon" type="image/x-icon")
@@ -22,7 +23,15 @@ html
           ul.mo-nav-mobile__menu.mo-nav-mobile-menu
             li.mo-nav-mobile-menu__item
               a.mo-nav-mobile-menu__link(href='/', rel='nofollow')
-                | Home
+                = locale.nav.home
+            li.mo-nav-mobile-menu__item
+              -
+              if !isUserSignIn
+                a.mo-nav-mobile-menu__link(class=helpers.isActive('signIn', nav) href='/users/sign_in')
+                  = locale.user.signIn
+              else
+                a.mo-nav-mobile-menu__link(class=helpers.isActive('signIn', nav) href='/users/logout')
+                  = locale.user.logout
     #mo-navbar.mo-navbar
       .mo-navbar__container
         span.show-mobile.mdi-icon.mdi-edwardxiao.white.mobile-menu-icon
@@ -30,35 +39,58 @@ html
           span.mdi-icon.mdi-edwardxiao.main-logo.white.no-mobile
           span.show-mobile.main-logo
             span.site-name
-              | Edward Xiao
+              = locale.site.edwardxiao + locale.words.ss + locale.words.hut
         .mo-navbar__nav.mo-nav
           .mo-nav__item.active
             a.nav-link(href='/')
-              | 首页
+              = locale.nav.home
               span.sr-only (current)
           .mo-nav__item.mo-dropdown
-            a.mo-nav__link(href='/about') 关于我们
+            a.mo-nav__link(href='/about')
+              = locale.nav.portfolio
             .mo-dropdown__menu
               .mo-dropdown__item
-                a(href='#') Action
+                a(href='#')
+                  = locale.nav.logoDesign
               .mo-dropdown__item
-                a(href='#') Another action
+                a(href='#')
+                  = locale.nav.graphicDesign
               .mo-dropdown__item
-                a(href='#') Something else here
+                a(href='#')
+                  = locale.nav.industrialDesign
               .mo-dropdown__item
-                a(href='#') Separated link
+                a(href='#')
+                  = locale.nav.webDesign
+              .mo-dropdown__item
+                a(href='#')
+                  = locale.nav.photograph
           .mo-nav__item
-            a.mo-nav__link(class=helpers.isActive('index', nav) href='/') Home
+            a.mo-nav__link(class=helpers.isActive('index', nav) href='/')
+              = locale.nav.contact
           .mo-nav__item
-            a.mo-nav__link(class=helpers.isActive('index', nav) href='/news') News
+            a.mo-nav__link(class=helpers.isActive('index', nav) href='/news')
+              = locale.nav.about
           .mo-nav__item
-            a.mo-nav__link(class=helpers.isActive('index', nav) href='/about') About
-          - if(!isUserSignIn)
-            .mo-nav__item
-              a.mo-nav__link(class=helpers.isActive('signIn', nav) href='/users/sign_in') SignIn
-          - else
-            .mo-nav__item
-              a.mo-nav__link(class=helpers.isActive('signIn', nav) href='/users/logout') Logout
+            a.mo-nav__link(class=helpers.isActive('index', nav) href='/about')
+              = locale.nav.article
+        .mo-navbar__users
+          .mo-navbar__users-container
+            form.locales-form(action='/', method='get')
+              .form-group
+                select.form-control.input-sm
+                  option(value='en' selected=helpers.isSelected('en', selectedLocale))
+                    | English
+                  option(value='zh-cn' selected=helpers.isSelected('zh-cn', selectedLocale))
+                    | 中文
+            -
+            if !isUserSignIn
+              .mo-nav__item.no-mobile-display
+                a.mo-nav__link(class=helpers.isActive('signIn', nav) href='/users/sign_in')
+                  = locale.user.signIn
+            else
+              .mo-nav__item.no-mobile-display
+                a.mo-nav__link(class=helpers.isActive('signIn', nav) href='/users/logout')
+                  = locale.user.logout
     .container.main
       block content
       .push

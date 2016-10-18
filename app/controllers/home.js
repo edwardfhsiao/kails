@@ -28,7 +28,7 @@ const index = async (ctx, _next) => {
     title: 'Home',
     nav: 'index',
     prerenderHtml: '',
-    preloadedState: { articles: articles },
+    preloadedState: { locale: ctx.locale, articles: articles },
     baseUrl: '/',
     currentPage: page,
     pages: parseInt(articleCount / 10 + 1)

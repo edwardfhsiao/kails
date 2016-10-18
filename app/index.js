@@ -62,6 +62,9 @@ app.use(convert(csrf()));
 // add helpers for views
 app.use(middlewares.addHelper);
 
+// get locale
+app.use(middlewares.getLocale);
+
 app.use(router.routes(), router.allowedMethods());
 
 if (process.argv[2] && process.argv[2][0] == 'c') {

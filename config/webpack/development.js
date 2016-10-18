@@ -8,7 +8,7 @@ var config = _.merge(base, {
   debug: true,
   outputPathinfo: true,
   displayErrorDetails: true,
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'eval-source-map',
   output: {
     publicPath: '/assets/'
   }

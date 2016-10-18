@@ -29,6 +29,14 @@ exports.isActive = function (action, param) {
   return active;
 };
 
+exports.isSelected = function (value, selectedValue) {
+  let isSelected = false;
+  if(value == selectedValue){
+    isSelected = true;
+  }
+  return isSelected;
+};
+
 // moment.locale('zh-cn')
 
 exports.timeAgo = function (date) {

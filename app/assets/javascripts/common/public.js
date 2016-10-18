@@ -13,6 +13,10 @@ $(document).on('click', '.mo-nav-mobile__mask', () => {
   $('.mo-navbar__nav-mobile.mo-nav-mobile').removeClass('visible');
 });
 
+$(document).on('change', '.locales-form .form-control', (evt) => {
+  window.location = "/?locale=" + $(evt.target).val();
+});
+
 $(window).scroll(function() {
   var currentScrollHight, targetScrollHight;
   currentScrollHight = $(window).scrollTop();

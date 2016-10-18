@@ -1,6 +1,7 @@
-import logger from 'koa-logger';
 import helpers from '../helpers';
 import models from '../models';
+import config from '../../config/config';
+import _ from 'lodash';
 
 async function catchError(ctx, next) {
   try {
@@ -17,7 +18,7 @@ async function catchError(ctx, next) {
     };
     await ctx.render('error/error', {});
     if (status == 500) {
-      logger.error('server error', err, ctx);
+      console.log('server error', err, ctx);
     }
   }
 }
@@ -36,7 +37,26 @@ async function addHelper(ctx, next) {
   await next();
 }
 
+let locale;
+async function getLocale(ctx, next) {
+  let rq = ctx.request.query;
+  let localeFile = rq.locale || config.local;
+  ctx.session.locale = localeFile;
+  try {
+    locale = require('../../config/locales/' + localeFile);
+  } catch (ex) {
+    locale = require('../../config/locales/' + config.locale);
+  }
+  ctx.state = _.merge(ctx.state, {
+    locale: locale,
+    selectedLocale: localeFile
+  })
+  console.log(ctx.state);
+  await next();
+}
+
 export default {
   catchError,
-  addHelper
+  addHelper,
+  getLocale
 };
