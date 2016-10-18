@@ -40,8 +40,28 @@ async function addHelper(ctx, next) {
 let locale;
 async function getLocale(ctx, next) {
   let rq = ctx.request.query;
-  let localeFile = rq.locale || config.local;
-  ctx.session.locale = localeFile;
+  let localeFile;
+  if (_.isEmpty(rq.locale) && _.isEmpty(ctx.session.locale)){
+    ctx.session.locale = config.locale;
+  }
+  else if (_.isEmpty(rq.locale) && !_.isEmpty(ctx.session.locale)){
+    localeFile = ctx.session.locale;
+  }
+  else{
+    ctx.session.locale = rq.locale;
+  }
+  localeFile = ctx.session.locale;
+  // if (ctx.session.locale != localeFile){
+  //   ctx.session.locale = localeFile;
+  // }
+  if (!_.includes(config.locales, ctx.session.locale)){
+    ctx.session.locale = config.locale;
+  }
+  console.log('******');
+  console.log(rq.locale);
+  console.log(ctx.session.locale);
+  console.log('******');
+  localeFile = ctx.session.locale;
   try {
     locale = require('../../config/locales/' + localeFile);
   } catch (ex) {
@@ -51,7 +71,6 @@ async function getLocale(ctx, next) {
     locale: locale,
     selectedLocale: localeFile
   })
-  console.log(ctx.state);
   await next();
 }
 

@@ -28,10 +28,8 @@ const index = async (ctx, _next) => {
     title: 'Home',
     nav: 'index',
     prerenderHtml: '',
-    preloadedState: { locale: ctx.locale, articles: articles },
+    preloadedState: { locale: ctx.state.locale, articles: articles },
     baseUrl: '/',
-    currentPage: page,
-    pages: parseInt(articleCount / 10 + 1)
   };
   await ctx.render('home/index', locals);
 };

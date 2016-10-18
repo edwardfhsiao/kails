@@ -16,5 +16,6 @@ var defaultConfig = {
 var config = _.merge(defaultConfig, configs[env]);
 
 config.locale = 'zh-cn';
+config.locales = ['zh-cn', 'en', 'zh-tw'];
 
 module.exports = config;

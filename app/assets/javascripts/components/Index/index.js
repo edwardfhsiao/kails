@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import bowser from 'bowser';
-import {
-  fetchArticles
-} from './actions/index';
 
 // import NewsItem from './NewsItem/index';
 class Index extends Component {
@@ -20,41 +17,36 @@ class Index extends Component {
   }
 
   render() {
+    let { locale } = this.props;
     return(
-    <div className="index-wrapper">
-      <div className="index-intro">
-        <div className="index-intro__header">
-          <h1>
-            ewifoewfuhj
-          </h1>
+      <div className="index-wrapper">
+        <div className="index-intro">
+          <div className="index-intro__header">
+            <h1>
+              {locale.site.edwardxiao}
+            </h1>
+          </div>
+        </div>
+        <div className="index-section">
+          dfwderfer
         </div>
       </div>
-      <div className="index-section">
-        dfwderfer
-      </div>
-    </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  let { articleList, currentPage, totalPages } = state;
-  return { articleList, currentPage, totalPages };
+  let { locale } = state;
+  return { locale };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchArticles: (page) => {
-      dispatch(fetchArticles(page));
-    }
   };
 }
 
 Index.propTypes = {
-  fetchArticles: React.PropTypes.func.isRequired,
-  articleList: React.PropTypes.array.isRequired,
-  currentPage: React.PropTypes.number.isRequired,
-  totalPages: React.PropTypes.number.isRequired
+  locale: React.PropTypes.object.isRequired,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);

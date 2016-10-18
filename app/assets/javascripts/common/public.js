@@ -1,4 +1,6 @@
 import bowser from 'bowser';
+import Utils from './utils';
+import _ from 'lodash';
 
 if (bowser.msie && bowser.version <= 8) {
   require('es5-shim');
@@ -14,7 +16,16 @@ $(document).on('click', '.mo-nav-mobile__mask', () => {
 });
 
 $(document).on('change', '.locales-form .form-control', (evt) => {
-  window.location = "/?locale=" + $(evt.target).val();
+  let locale = Utils.urlParam('locale');
+  let url = window.location.href;
+  let val = $(evt.target).val();
+  if (_.isNull(locale)){
+    window.location = url + '?locale=' + val;
+  }
+  else{
+    let newUrl = url.replace('locale=' + locale, 'locale=' + val);
+    window.location = newUrl;
+  }
 });
 
 $(window).scroll(function() {
