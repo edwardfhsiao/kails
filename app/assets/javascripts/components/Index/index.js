@@ -6,7 +6,8 @@ import 'fullpage.js/jquery.fullPage.js';
 import 'fullpage.js/jquery.fullPage.css';
 import Utils from '../../common/utils';
 import {
-  changeLocale
+  changeLocale,
+  login
 } from './actions/index';
 
 class Index extends Component {
@@ -14,17 +15,23 @@ class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      localeName: 'zh-cn'
+      localeName: 'zh-cn',
+      email: '',
+      password: ''
     }
   }
 
   componentDidMount(){
     this.initLocale();
+    this.initFullPage();
     $('body').addClass('visible');
+  }
+
+  initFullPage(){
     $('#fullpage').fullpage({
       //Navigation
-      menu: '#mo-navbar',
-      lockAnchors: false,
+      menu: '.mo-nav__menu',
+      lockAnchors: true,
       anchors: [
         'home-section',
         'logo-design-section',
@@ -37,11 +44,17 @@ class Index extends Component {
         'contact-section'
         ],
       navigation: false,
-      navigationPosition: 'right',
-      navigationTooltips: ['firstSlide', 'secondSlide'],
-      showActiveTooltip: false,
-      slidesNavigation: true,
-      slidesNavPosition: 'bottom',
+      //Scrolling
+      css3: true,
+      scrollingSpeed: 700,
+      autoScrolling: true,
+      fitToSection: true,
+      fitToSectionDelay: 1000,
+      scrollBar: false,
+      easing: 'easeInOutCubic',
+      easingcss3: 'ease',
+      loopBottom: false,
+      loopTop: false,
       onLeave: function(index, nextIndex, direction){
         if (nextIndex != 1){
           $('.mo-navbar').addClass('mo-navbar--up');
@@ -50,6 +63,20 @@ class Index extends Component {
           $('.mo-navbar').removeClass('mo-navbar--up');
         }
       },
+      afterLoad: function(anchorLink, index){
+        let active = false;
+        $('.mo-dropdown__menu .mo-dropdown__item').map((key, item) => {
+          if ($(item).hasClass('active')){
+            active = true;
+          }
+        });
+        if (active){
+          $('.mo-nav__item.mo-dropdown').addClass('highlight');
+        }
+        else{
+          $('.mo-nav__item.mo-dropdown').removeClass('highlight');
+        }
+      }
     });
   }
 
@@ -74,27 +101,97 @@ class Index extends Component {
     Utils.setCookie('locale', localeName, 10);
   }
 
+  goToSection(num){
+    $.fn.fullpage.moveTo(num);
+  }
+
+  handleChangeEmail(){
+    let email = this.refs.email.value;
+    this.setState({email});
+  }
+
+  handleChangePassword(){
+    let password = this.refs.password.value;
+    this.setState({password});
+  }
+
+  login(){
+    let email = this.refs.email.value;
+    let password = this.refs.password.value;
+    debugger;
+    this.props.login(email, password);
+  }
+
   render() {
-    let { locale } = this.props;
-    let { localeName } = this.state;
+    let {
+      localeName,
+      email,
+      password
+    } = this.state;
+    let {
+      locale,
+      csrf,
+      currentUser,
+      isUserSignIn
+    } = this.props;
+
+    let userInfoHtml, userInfoHtmlMobile;
+    if (isUserSignIn){
+      userInfoHtml = (
+        <div className="mo-nav__item no-mobile-display"><a className="mo-nav__link" href="/users/logout">{locale.user.logout}</a></div>
+      );
+      userInfoHtmlMobile = (
+        <div className="mo-nav__item no-mobile-display"><a className="mo-nav__link" href="/users/logout">{locale.user.logout}</a></div>
+      );
+    }
+    else{
+      userInfoHtml = (
+        <div className="mo-nav__item no-mobile-display"><a className="mo-nav__link" href="/users/sign_in">{locale.user.signIn}</a></div>
+      );
+      userInfoHtmlMobile = (
+        <div className="mo-nav__item no-mobile-display"><a className="mo-nav__link" href="/users/sign_in">{locale.user.signIn}</a></div>
+      );
+    }
     return(
       <div className="body">
         <div className="mo-navbar__nav-mobile mo-nav-mobile" role="navigation">
            <div className="mo-nav-mobile__mask"></div>
            <div className="mo-nav-mobile__content">
               <div className="mo-nav-mobile__menu-wrapper">
-                 <ul className="mo-nav-mobile__menu mo-nav-mobile-menu" id="mo-navbar">
+                  {userInfoHtmlMobile}
+                  <ul className="mo-nav-mobile__menu mo-nav-mobile-menu mo-nav__menu">
                     <li className="mo-nav-mobile-menu__item" data-menuanchor="home-section">
-                      <a className="mo-nav-mobile-menu__link" href="#home-section" rel="nofollow">{locale.nav.home}</a>
+                      <a className="mo-nav-mobile-menu__link" href="#home-section" rel="nofollow" onClick={this.goToSection.bind(this, 1)}>{locale.nav.home}</a>
                     </li>
-                    <li className="mo-nav-mobile-menu__item" data-menuanchor="portfolio-section">
-                      <a className="mo-nav-mobile-menu__link" href="#portfolio-section">{locale.user.signIn}</a>
+                    <li className="mo-nav-mobile-menu__item" data-menuanchor="logo-design-section">
+                      <a className="mo-nav-mobile-menu__link" href="#" rel="nofollow" onClick={this.goToSection.bind(this, 2)}>{locale.nav.logoDesign}</a>
                     </li>
-                 </ul>
+                    <li className="mo-nav-mobile-menu__item" data-menuanchor="graphic-design-section">
+                      <a className="mo-nav-mobile-menu__link" href="#" rel="nofollow" onClick={this.goToSection.bind(this, 3)}>{locale.nav.graphicDesign}</a>
+                    </li>
+                    <li className="mo-nav-mobile-menu__item" data-menuanchor="industrial-design-section">
+                      <a className="mo-nav-mobile-menu__link" href="#" rel="nofollow" onClick={this.goToSection.bind(this, 4)}>{locale.nav.industrialDesign}</a>
+                    </li>
+                    <li className="mo-nav-mobile-menu__item" data-menuanchor="web-design-section">
+                      <a className="mo-nav-mobile-menu__link" href="#" rel="nofollow" onClick={this.goToSection.bind(this, 5)}>{locale.nav.webDesign}</a>
+                    </li>
+                    <li className="mo-nav-mobile-menu__item" data-menuanchor="photograph-section">
+                      <a className="mo-nav-mobile-menu__link" href="#" rel="nofollow" onClick={this.goToSection.bind(this, 6)}>{locale.nav.photograph}</a>
+                    </li>
+                    <li className="mo-nav-mobile-menu__item" data-menuanchor="article-section">
+                      <a className="mo-nav-mobile-menu__link" href="#" rel="nofollow" onClick={this.goToSection.bind(this, 7)}>{locale.nav.article}</a>
+                    </li>
+                    <li className="mo-nav-mobile-menu__item" data-menuanchor="about-section">
+                      <a className="mo-nav-mobile-menu__link" href="#" rel="nofollow" onClick={this.goToSection.bind(this, 8)}>{locale.nav.about}</a>
+                    </li>
+                    <li className="mo-nav-mobile-menu__item" data-menuanchor="contact-section">
+                      <a className="mo-nav-mobile-menu__link" href="#" rel="nofollow" onClick={this.goToSection.bind(this, 9)}>{locale.nav.contact}</a>
+                    </li>
+                  </ul>
               </div>
            </div>
         </div>
-        <div className="mo-navbar" id="mo-navbar">
+        <div className="mo-navbar">
            <div className="mo-navbar__container">
               <span className="show-mobile mdi-icon mdi-edwardxiao white mobile-menu-icon"></span>
               <a className="mo-navbar__brand" href="#">
@@ -105,21 +202,21 @@ class Index extends Component {
                   </span>
                 </span>
               </a>
-              <div className="mo-navbar__nav mo-nav" id="menu">
-                 <div className="mo-nav__item" data-menuanchor="home-section"><a className="nav-link" href="#home-section">{locale.nav.home}</a></div>
+              <div className="mo-navbar__nav mo-nav mo-nav__menu">
+                 <div className="mo-nav__item" data-menuanchor="home-section"><a className="nav-link" href="#home-section" onClick={this.goToSection.bind(this, 1)}>{locale.nav.home}</a></div>
                  <div className="mo-nav__item mo-dropdown" data-menuanchor="logo-design-section">
-                    <a className="mo-nav__link" href="#logo-design-section">{locale.nav.portfolio}</a>
+                    <a className="mo-nav__link" href="#logo-design-section" onClick={this.goToSection.bind(this, 2)}>{locale.nav.portfolio}</a>
                     <div className="mo-dropdown__menu">
-                       <div className="mo-dropdown__item" data-menuanchor="logo-design-section"><a href="#logo-design-section">{locale.nav.logoDesign}</a></div>
-                       <div className="mo-dropdown__item" data-menuanchor="graphic-design-section"><a href="#graphic-design-section">{locale.nav.graphicDesign}</a></div>
-                       <div className="mo-dropdown__item" data-menuanchor="industrial-design-section"><a href="#industrial-design-section">{locale.nav.industrialDesign}</a></div>
-                       <div className="mo-dropdown__item" data-menuanchor="web-design-section"><a href="#web-design-section">{locale.nav.webDesign}</a></div>
-                       <div className="mo-dropdown__item" data-menuanchor="photograph-section"><a href="#photograph-section">{locale.nav.photograph}</a></div>
+                       <div className="mo-dropdown__item" data-menuanchor="logo-design-section"><a href="#" onClick={this.goToSection.bind(this, 2)}>{locale.nav.logoDesign}</a></div>
+                       <div className="mo-dropdown__item" data-menuanchor="graphic-design-section"><a href="#" onClick={this.goToSection.bind(this, 3)}>{locale.nav.graphicDesign}</a></div>
+                       <div className="mo-dropdown__item" data-menuanchor="industrial-design-section"><a href="#" onClick={this.goToSection.bind(this, 4)}>{locale.nav.industrialDesign}</a></div>
+                       <div className="mo-dropdown__item" data-menuanchor="web-design-section"><a href="#" onClick={this.goToSection.bind(this, 5)}>{locale.nav.webDesign}</a></div>
+                       <div className="mo-dropdown__item" data-menuanchor="photograph-section"><a href="#" onClick={this.goToSection.bind(this, 6)}>{locale.nav.photograph}</a></div>
                     </div>
                  </div>
-                 <div className="mo-nav__item" data-menuanchor="article-section"><a className="mo-nav__link" href="#article-section">{locale.nav.article}</a></div>
-                 <div className="mo-nav__item" data-menuanchor="about-section"><a className="mo-nav__link" href="#about-section">{locale.nav.about}</a></div>
-                 <div className="mo-nav__item" data-menuanchor="contact-section"><a className="mo-nav__link" href="#contact-section">{locale.nav.contact}</a></div>
+                 <div className="mo-nav__item" data-menuanchor="article-section"><a className="mo-nav__link" href="#" onClick={this.goToSection.bind(this, 7)}>{locale.nav.article}</a></div>
+                 <div className="mo-nav__item" data-menuanchor="about-section"><a className="mo-nav__link" href="#" onClick={this.goToSection.bind(this, 8)}>{locale.nav.about}</a></div>
+                 <div className="mo-nav__item" data-menuanchor="contact-section"><a className="mo-nav__link" href="#" onClick={this.goToSection.bind(this, 9)}>{locale.nav.contact}</a></div>
               </div>
               <div className="mo-navbar__users">
                  <div className="mo-navbar__users-container">
@@ -131,7 +228,7 @@ class Index extends Component {
                           </select>
                        </div>
                     </form>
-                    <div className="mo-nav__item no-mobile-display"><a className="mo-nav__link" href="/users/sign_in">{locale.user.signIn}</a></div>
+                    {userInfoHtml}
                  </div>
               </div>
            </div>
@@ -143,7 +240,11 @@ class Index extends Component {
                   efew
                 </div>
               </div>
-              <div className="section logo-design-section" data-anchor="logo-design-section">logo-design-section</div>
+              <div className="section logo-design-section" data-anchor="logo-design-section">
+                <input type="text" value={email} ref="email" onChange={this.handleChangeEmail.bind(this)} />
+                <input type="text" value={password} ref="password" onChange={this.handleChangePassword.bind(this)} />
+                <input type="button" onClick={this.login.bind(this)} />
+              </div>
               <div className="section graphic-design-section" data-anchor="graphic-design-section">graphic-design-section</div>
               <div className="section industrial-design-section" data-anchor="industrial-design-section">industrial-design-section</div>
               <div className="section web-design-section" data-anchor="web-design-section">web-design-section</div>
@@ -163,14 +264,16 @@ class Index extends Component {
 }
 
 function mapStateToProps(state) {
-  let { locale } = state;
-  return { locale };
+  return { ...state };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     changeLocale: (localeName) => {
       dispatch(changeLocale(localeName));
+    },
+    login: (email, password) => {
+      dispatch(login(email, password));
     }
   };
 }

@@ -21,6 +21,14 @@ export const changeLocale = (localeName) => (dispatch, getState) => {
   }
 }
 
+export const login = (email, password) => (dispatch, getState) => {
+  let state = getState();
+  loginApi(email, password, state.csrf).then((response) => {
+    console.log(response);
+  }).catch(() => {
+    message.showError('网络出错');
+  });
+}
 
 export const SET_ARTICLE = 'SET_ARTICLE';
 export const setArticle = (article) => ({
@@ -99,6 +107,30 @@ function filterArticle(articleList, id) {
     article = result[0];
   }
   return article;
+}
+
+function loginApi(email, password, csrf) {
+  return new Promise((resolve, reject) => {
+    let tokenForm = new FormData();
+    // tokenForm.append("utf8", "✓");
+    tokenForm.append('_csrf', csrf);
+    tokenForm.append('email', email);
+    tokenForm.append('password', password);
+    console.log(csrf);
+    $.ajax({
+      url: PATH.url + 'users/sign_in_api',
+      data: tokenForm,
+      type: 'POST',
+      processData: false,
+      contentType: false,
+      success: (data) => {
+        resolve(data);
+      },
+      error: (error) => {
+        reject(error);
+      }
+    });
+  })
 }
 
 function fetchArticlesApi(page, perPage) {

@@ -49,9 +49,29 @@ const LogIn = async (ctx, _next) => {
   }
 };
 
+const LogInApi = async (ctx, _next) => {
+  console.log('/////');
+  const body = ctx.request.body;
+  if (!(body.email && body.password)) {
+    const locals = setLocals('params error.');
+    await ctx.render('users/signIn', locals);
+    return;
+  }
+  let user = await models.User.findOne({ where: { email: body.email }});
+  if(user && user.authenticate(body.password)) {
+    ctx.session.userId = user.id;
+    ctx.status = 302;
+    ctx.body({foo: 'bar'});
+  } else {
+    const locals = setLocals('user name or password error.');
+    await ctx.render('users/signIn', locals);
+  }
+};
+
 export default {
   index,
   signIn,
   LogIn,
-  LogOut
+  LogOut,
+  LogInApi
 };

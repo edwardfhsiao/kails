@@ -150,12 +150,16 @@ body.visible{
   transition: background .4s;
 }
 
+.mo-navbar.mo-navbar--up .mo-navbar__nav.mo-nav .mo-nav__item.highlight,
+.mo-navbar.mo-navbar--up .mo-navbar__nav.mo-nav .mo-nav__item.active {
+  background-color: #419c6a;
+}
+
 .mo-navbar .mo-navbar__nav.mo-nav .mo-nav__item a {
   transition: background .4s, color .4s;
 }
 
 .mo-navbar .mo-navbar__nav.mo-nav .mo-nav__item:hover {
-  font-weight: 800;
   text-decoration: underline;
 }
 
@@ -244,6 +248,10 @@ body.visible{
   visibility: hidden;
   z-index: 5;
   transition: visibility .2s;
+}
+
+.mo-nav-mobile-menu__item.active{
+  background-color: #419c6a;
 }
 
 .mo-navbar__nav-mobile.mo-nav-mobile.visible {

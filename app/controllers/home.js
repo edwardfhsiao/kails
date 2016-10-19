@@ -24,11 +24,16 @@ const index = async (ctx, _next) => {
   //   <Index articles={ articles } />
   // );
   // ctx.session.userId = 4
+  let appState = {
+    csrf: ctx.csrf,
+    currentUser: ctx.state.currentUser,
+    isUserSignIn: ctx.state.isUserSignIn
+  };
   const locals = {
     title: 'Home',
     nav: 'index',
     prerenderHtml: '',
-    preloadedState: { locale: ctx.state.locale, articles: articles },
+    preloadedState: { appState: appState, articles: articles },
     baseUrl: '/',
   };
   await ctx.render('home/index', locals);

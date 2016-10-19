@@ -39,38 +39,38 @@ async function addHelper(ctx, next) {
 
 let locale;
 async function getLocale(ctx, next) {
-  let rq = ctx.request.query;
-  let localeFile;
-  if (_.isEmpty(rq.locale) && _.isEmpty(ctx.session.locale)){
-    ctx.session.locale = config.locale;
-  }
-  else if (_.isEmpty(rq.locale) && !_.isEmpty(ctx.session.locale)){
-    localeFile = ctx.session.locale;
-  }
-  else{
-    ctx.session.locale = rq.locale;
-  }
-  localeFile = ctx.session.locale;
-  // if (ctx.session.locale != localeFile){
-  //   ctx.session.locale = localeFile;
+  // let rq = ctx.request.query;
+  // let localeFile;
+  // if (_.isEmpty(rq.locale) && _.isEmpty(ctx.session.locale)){
+  //   ctx.session.locale = config.locale;
   // }
-  if (!_.includes(config.locales, ctx.session.locale)){
-    ctx.session.locale = config.locale;
-  }
-  console.log('******');
-  console.log(rq.locale);
-  console.log(ctx.session.locale);
-  console.log('******');
-  localeFile = ctx.session.locale;
-  try {
-    locale = require('../../config/locales/' + localeFile);
-  } catch (ex) {
-    locale = require('../../config/locales/' + config.locale);
-  }
-  ctx.state = _.merge(ctx.state, {
-    locale: locale,
-    selectedLocale: localeFile
-  })
+  // else if (_.isEmpty(rq.locale) && !_.isEmpty(ctx.session.locale)){
+  //   localeFile = ctx.session.locale;
+  // }
+  // else{
+  //   ctx.session.locale = rq.locale;
+  // }
+  // localeFile = ctx.session.locale;
+  // // if (ctx.session.locale != localeFile){
+  // //   ctx.session.locale = localeFile;
+  // // }
+  // if (!_.includes(config.locales, ctx.session.locale)){
+  //   ctx.session.locale = config.locale;
+  // }
+  // console.log('******');
+  // console.log(rq.locale);
+  // console.log(ctx.session.locale);
+  // console.log('******');
+  // localeFile = ctx.session.locale;
+  // try {
+  //   locale = require('../../config/locales/' + localeFile);
+  // } catch (ex) {
+  //   locale = require('../../config/locales/' + config.locale);
+  // }
+  // ctx.state = _.merge(ctx.state, {
+  //   locale: locale,
+  //   selectedLocale: localeFile
+  // })
   await next();
 }
 
