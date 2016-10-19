@@ -2,7 +2,13 @@ body,
 html {
   height: 100%;
 }
-
+body {
+  opacity: 0;
+  transition: opacity .4s;
+}
+body.visible{
+  opacity: 1;
+}
 .no-mobile {
   visibility: visible;
 }

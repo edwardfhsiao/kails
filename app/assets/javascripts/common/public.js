@@ -1,6 +1,8 @@
 import bowser from 'bowser';
 import Utils from './utils';
 import _ from 'lodash';
+import 'bootstrap-sass/assets/javascripts/bootstrap/scrollspy';
+
 
 if (bowser.msie && bowser.version <= 8) {
   require('es5-shim');
@@ -15,18 +17,18 @@ $(document).on('click', '.mo-nav-mobile__mask', () => {
   $('.mo-navbar__nav-mobile.mo-nav-mobile').removeClass('visible');
 });
 
-$(document).on('change', '.locales-form .form-control', (evt) => {
-  let locale = Utils.urlParam('locale');
-  let url = window.location.href;
-  let val = $(evt.target).val();
-  if (_.isNull(locale)){
-    window.location = url + '?locale=' + val;
-  }
-  else{
-    let newUrl = url.replace('locale=' + locale, 'locale=' + val);
-    window.location = newUrl;
-  }
-});
+// $(document).on('change', '.locales-form .form-control', (evt) => {
+//   let locale = Utils.urlParam('locale');
+//   let url = window.location.href;
+//   let val = $(evt.target).val();
+//   if (_.isNull(locale)){
+//     window.location = url + '?locale=' + val;
+//   }
+//   else{
+//     let newUrl = url.replace('locale=' + locale, 'locale=' + val);
+//     window.location = newUrl;
+//   }
+// });
 
 $(window).scroll(function() {
   var currentScrollHight, targetScrollHight;

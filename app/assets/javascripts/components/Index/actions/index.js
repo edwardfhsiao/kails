@@ -6,11 +6,21 @@ polyfill();
 let message = new Message();
 let validator = new Validator();
 
-export const SET_ARTICLE_LIST = 'SET_ARTICLE_LIST';
-export const setArticleList = (articleList) => ({
-  type: SET_ARTICLE_LIST,
-  articleList
+export const SET_LOCALE = 'SET_LOCALE';
+export const setLocale = (locale) => ({
+  type: SET_LOCALE,
+  locale
 });
+
+export const changeLocale = (localeName) => (dispatch, getState) => {
+  let state = getState();
+  let { locale } = state;
+  let newLocale = require('../../../common/locales/' + localeName);
+  if (locale != newLocale){
+    dispatch(setLocale(newLocale));
+  }
+}
+
 
 export const SET_ARTICLE = 'SET_ARTICLE';
 export const setArticle = (article) => ({
