@@ -22,7 +22,7 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_button-groups";
 
 // Components: Popovers
-@import "~bootstrap-sass/assets/stylesheets/bootstrap/_modals";
+
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_tooltip";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_popovers";
 
@@ -41,7 +41,7 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_input-groups";
 @import "~bootstrap-sass/assets/stylesheets/bootstrap/_component-animations";
-
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/_modals";
 
 // $fa-font-path:  "~font-awesome/fonts" !default;
 // @import "~font-awesome/scss/font-awesome";

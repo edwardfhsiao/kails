@@ -1,3 +1,12 @@
+body {
+  opacity: 0;
+  transition: opacity .4s;
+}
+
+body.visible{
+  opacity: 1;
+}
+
 .home-section {
   position: relative;
   background: url('../images/jumbotron.jpg');

@@ -1,8 +1,4 @@
 import bowser from 'bowser';
-import Utils from './utils';
-import _ from 'lodash';
-import 'bootstrap-sass/assets/javascripts/bootstrap/scrollspy';
-
 
 if (bowser.msie && bowser.version <= 8) {
   require('es5-shim');

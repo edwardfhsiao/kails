@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import bowser from 'bowser';
 import _ from 'lodash';
-import 'fullpage.js/jquery.fullPage.js';
-import 'fullpage.js/jquery.fullPage.css';
+import 'fullpage.js/dist/jquery.fullPage.min.css';
+import 'fullpage.js/dist/jquery.fullPage.min.js';
+import 'fullpage.js/dist/jquery.fullPage.extensions.min.js';
+import 'bootstrap-sass/assets/javascripts/bootstrap/modal';
+import 'bootstrap-sass/assets/javascripts/bootstrap/transition';
 import Utils from '../../common/utils';
+import Modal from './Modal/index';
 import {
   changeLocale,
   login
@@ -15,7 +19,7 @@ class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      localeName: 'zh-cn',
+      localeName: 'zh-CN',
       email: '',
       password: ''
     }
@@ -25,6 +29,10 @@ class Index extends Component {
     this.initLocale();
     this.initFullPage();
     $('body').addClass('visible');
+  }
+
+  handleLoginClick(){
+    $('#login-modal').modal();
   }
 
   initFullPage(){
@@ -118,7 +126,6 @@ class Index extends Component {
   login(){
     let email = this.refs.email.value;
     let password = this.refs.password.value;
-    debugger;
     this.props.login(email, password);
   }
 
@@ -146,10 +153,10 @@ class Index extends Component {
     }
     else{
       userInfoHtml = (
-        <div className="mo-nav__item no-mobile-display"><a className="mo-nav__link" href="/users/sign_in">{locale.user.signIn}</a></div>
+        <div className="mo-nav__item no-mobile-display"><a className="mo-nav__link" href="#" onClick={this.handleLoginClick.bind(this)}>{locale.user.signIn}</a></div>
       );
       userInfoHtmlMobile = (
-        <div className="mo-nav__item no-mobile-display"><a className="mo-nav__link" href="/users/sign_in">{locale.user.signIn}</a></div>
+        <div className="mo-nav__item no-mobile-display"><a className="mo-nav__link" href="#" onClick={this.handleLoginClick.bind(this)}>{locale.user.signIn}</a></div>
       );
     }
     return(
@@ -223,8 +230,8 @@ class Index extends Component {
                     <form className="locales-form" action="/" method="get">
                        <div className="form-group">
                           <select className="form-control input-sm" ref="localeName" onChange={this.handleLocaleChange.bind(this)} value={localeName}>
-                             <option value="en">English</option>
-                             <option value="zh-cn">中文</option>
+                             <option value="en-US">English</option>
+                             <option value="zh-CN">中文</option>
                           </select>
                        </div>
                     </form>
@@ -258,6 +265,7 @@ class Index extends Component {
         <div className="footer">
            <div className="container"></div>
         </div>
+        <Modal />
       </div>
     );
   }

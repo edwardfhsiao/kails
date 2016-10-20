@@ -23,6 +23,11 @@ module.exports = {
 		'account': 'account',
 		'address': 'address',
 	},
+	'login': {
+		'success': 'logged in successfully',
+		'emptyField': 'email and password are required',
+		'faild': 'invalid email or password',
+	},
 	'social': {
 		'facebook': 'facebook',
 		'twitter': 'twitter',
@@ -34,5 +39,8 @@ module.exports = {
 		'blog': 'Blog',
 		'hut': 'hut',
 		'ss': '\'s '
+	},
+	'network': {
+		'error': 'Network error'
 	}
 }

@@ -39,7 +39,8 @@ async function addHelper(ctx, next) {
 
 let locale;
 async function getLocale(ctx, next) {
-  // let rq = ctx.request.query;
+  let rq = ctx.request.body;
+  console.log(rq);
   // let localeFile;
   // if (_.isEmpty(rq.locale) && _.isEmpty(ctx.session.locale)){
   //   ctx.session.locale = config.locale;

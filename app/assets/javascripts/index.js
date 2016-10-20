@@ -4,7 +4,6 @@ import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { reducer } from './components/Index/reducers/index';
-import { syncHistoryWithStore } from 'react-router-redux';
 
 import Index from './components/Index/index';
 require('../stylesheets/index.scss');

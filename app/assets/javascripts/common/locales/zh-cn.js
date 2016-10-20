@@ -23,6 +23,11 @@ module.exports = {
 		'account': '账户',
 		'address': '地址',
 	},
+	'login': {
+		'success': '登陆成功',
+		'emptyField': '请填写邮箱与密码',
+		'faild': '账号或密码错误',
+	},
 	'social': {
 		'facebook': '脸书',
 		'twitter': '推特',
@@ -34,5 +39,8 @@ module.exports = {
 		'blog': '博客',
 		'hut': '小屋',
 		'ss': '的'
+	},
+	'network': {
+		'error': '网络出错'
 	}
 }
