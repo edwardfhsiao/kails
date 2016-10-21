@@ -12,11 +12,24 @@ export const setLocale = (locale) => ({
   locale
 });
 
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const setCurrentUser = (currentUser) => ({
+  type: SET_CURRENT_USER,
+  currentUser
+});
+
+export const SET_IS_SIGN_IN = 'SET_IS_SIGN_IN';
+export const setIsUserSignIn = (isUserSignIn) => ({
+  type: SET_IS_SIGN_IN,
+  isUserSignIn
+});
+
 export const changeLocale = (localeName) => (dispatch, getState) => {
   let state = getState();
   let { locale } = state;
   let newLocale = require('../../../common/locales/' + localeName);
   if (locale != newLocale){
+    window.localeName = localeName;
     dispatch(setLocale(newLocale));
   }
 }
@@ -26,13 +39,21 @@ export const login = (email, password) => (dispatch, getState) => {
   let locale = state.locale;
   loginApi(email, password, state.csrf).then((response) => {
     if (response.status == 0) {
-      message.showMessage(locale.login.success);
+      message.showMessage(locale.login.success, true, 2000);
+      console.log(response);
+      dispatch(setIsUserSignIn(true));
+      dispatch(setCurrentUser(response.user));
+      $('#login-modal').find('*[data-dismiss="modal"]').click();
     }
     else if (response.status == 1){
       message.showError(locale.login.emptyField);
+      validator.creatMessageApi($('#login-email-field').parent(), locale.login.emptyField, 'error');
+      validator.creatMessageApi($('#login-password-field').parent(), locale.login.emptyField, 'error');
     }
     else if (response.status == 2){
-      message.showError(locale.login.faild);
+      // message.showError(locale.login.faild);
+      validator.creatMessageApi($('#login-email-field').parent(), locale.login.faild, 'error');
+      // validator.creatMessage($('#login-password-field').parent(), locale.login.faild, 'error');
     }
   }).catch(() => {
     message.showError(locale.network.error);

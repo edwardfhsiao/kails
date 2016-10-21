@@ -1,5 +1,5 @@
 .my-validator-message{
-
+  margin-top: -10px;
 }
 .my-validator-message.my-validator-message--error{
 	color: #a94442;

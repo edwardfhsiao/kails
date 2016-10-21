@@ -10,10 +10,10 @@ module.exports = {
 	  'industrialDesign': '工业设计',
 	  'webDesign': '网页设计',
 	  'Programming': '编程',
-	  'photography': '摄影',
+	  'photograph': '摄影',
 	  'contact': '联络',
 	  'about': '关于',
-	  'article': '文章'
+	  'article': '文章',
 	},
 	'user': {
 		'signIn': '登陆',
@@ -22,6 +22,7 @@ module.exports = {
 		'email': '电邮',
 		'account': '账户',
 		'address': '地址',
+		'password': '密码',
 	},
 	'login': {
 		'success': '登陆成功',
@@ -38,9 +39,34 @@ module.exports = {
 		'frontend': '前端',
 		'blog': '博客',
 		'hut': '小屋',
-		'ss': '的'
+		'ss': '的',
+	},
+	'operation': {
+		'confirm': '确定',
+		'cancel': '取消',
+		'ok': '好',
+		'yes': '确定',
+		'no': '取消',
+		'add': '新增',
+		'insert': '添加',
+		'edit': '修改',
+		'update': '更新',
+		'delete': '删除',
+		'remove': '删除',
+		'search': '搜寻',
+		'find': '搜寻',
 	},
 	'network': {
-		'error': '网络出错'
+		'error': '网络出错',
+	},
+	'myValidator': {
+		'valid': '正确',
+		'required': '不能为空',
+		'invalidFormat': '格式不正确',
+		'numberOnly': '必须是数字',
+		'pleaseCheck': '请勾选',
+		'cannotLessThan': '不能小于',
+		'cannotGreatThan': '不能超过',
+		'charactor': '个字节',
 	}
 }

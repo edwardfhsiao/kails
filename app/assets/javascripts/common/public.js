@@ -1,4 +1,15 @@
 import bowser from 'bowser';
+import _ from 'lodash';
+import Config from '../config';
+import Utils from './utils';
+
+let localeCookie = Utils.getCookie('locale');
+let localeName = Config.localeName;
+if (_.isEmpty(localeCookie) || _.isUndefined(localeCookie)){
+  Utils.setCookie('locale', localeName, 10);
+  localeCookie = localeName;
+}
+window.localeName = localeCookie;
 
 if (bowser.msie && bowser.version <= 8) {
   require('es5-shim');

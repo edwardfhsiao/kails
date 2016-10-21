@@ -1,6 +1,6 @@
 .my-message {
   position: fixed;
-  z-index: 9;
+  z-index: 9999;
   opacity: 0;
   top: 0;
   width: 100%;

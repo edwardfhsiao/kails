@@ -10,10 +10,10 @@ module.exports = {
 	  'industrialDesign': 'Industrial Design',
 	  'webDesign': 'Web Design',
 	  'Programming': 'Programming',
-	  'photography': 'Photography',
+	  'photograph': 'Photograph',
 	  'contact': 'Contact',
 	  'about': 'About',
-	  'article': 'Article'
+	  'article': 'Article',
 	},
 	'user': {
 		'signIn': 'signIn',
@@ -22,6 +22,7 @@ module.exports = {
 		'email': 'email',
 		'account': 'account',
 		'address': 'address',
+		'password': 'password',
 	},
 	'login': {
 		'success': 'logged in successfully',
@@ -38,9 +39,34 @@ module.exports = {
 		'frontend': 'front-end',
 		'blog': 'Blog',
 		'hut': 'hut',
-		'ss': '\'s '
+		'ss': '\'s ',
+	},
+	'operation': {
+		'confirm': 'confirm',
+		'cancel': 'cancel',
+		'ok': 'ok',
+		'yes': 'yes',
+		'no': 'no',
+		'add': 'add',
+		'insert': 'insert',
+		'edit': 'edit',
+		'update': 'update',
+		'delete': 'delete',
+		'remove': 'remove',
+		'search': 'search',
+		'find': 'find',
 	},
 	'network': {
-		'error': 'Network error'
+		'error': 'Network error',
+	},
+	'myValidator': {
+		'valid': 'valid',
+		'required': ' is required',
+		'invalidFormat': ' \'s format is invalid',
+		'numberOnly': ' must be number only',
+		'pleaseCheck': 'Plesae check ',
+		'cannotLessThan': ' cannot less than',
+		'cannotGreatThan': ' cannot great than',
+		'charactor': ' charactor(s)',
 	}
 }

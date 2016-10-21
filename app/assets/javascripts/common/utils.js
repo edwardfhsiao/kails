@@ -27,6 +27,9 @@ let utils = {
       }
     }
     return '';
+  },
+  hideMobileMenu: () => {
+    $('.mo-navbar__nav-mobile.mo-nav-mobile').removeClass('visible');
   }
 }
 

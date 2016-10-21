@@ -58,7 +58,7 @@ const LogInApi = async (ctx, _next) => {
   let user = await models.User.findOne({ where: { email: body.email }});
   if(user && user.authenticate(body.password)) {
     ctx.session.userId = user.id;
-    ctx.body = {status: 0};
+    ctx.body = {status: 0, user: user};
     return;
   } else {
     ctx.body = {status: 2};

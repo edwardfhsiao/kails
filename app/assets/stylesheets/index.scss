@@ -25,6 +25,16 @@ body.visible{
   color: #fff
 }
 
+#login-modal .modal-body .input-group{
+  margin: 0 0 10px 0;
+}
+#login-modal .modal-body .operations{
+  text-align: right;
+}
+#login-modal .operations .btn.btn-primary{
+  margin-right: 10px;
+}
+
 @media only screen and (max-width: 790px) {
   .index-intro {
     height: 200px;

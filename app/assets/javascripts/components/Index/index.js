@@ -8,7 +8,7 @@ import 'fullpage.js/dist/jquery.fullPage.extensions.min.js';
 import 'bootstrap-sass/assets/javascripts/bootstrap/modal';
 import 'bootstrap-sass/assets/javascripts/bootstrap/transition';
 import Utils from '../../common/utils';
-import Modal from './Modal/index';
+import LoginModal from './LoginModal/index';
 import {
   changeLocale,
   login
@@ -19,9 +19,7 @@ class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      localeName: 'zh-CN',
-      email: '',
-      password: ''
+      localeName: 'zh-CN'
     }
   }
 
@@ -63,6 +61,7 @@ class Index extends Component {
       easingcss3: 'ease',
       loopBottom: false,
       loopTop: false,
+      normalScrollElements: '#login-modal, .mo-navbar__nav-mobile',
       onLeave: function(index, nextIndex, direction){
         if (nextIndex != 1){
           $('.mo-navbar').addClass('mo-navbar--up');
@@ -98,7 +97,6 @@ class Index extends Component {
     else{
       this.setState({localeName: localeCookie});
     }
-    console.log(this.props.locale);
     this.props.changeLocale(localeCookie);
   }
 
@@ -110,22 +108,14 @@ class Index extends Component {
   }
 
   goToSection(num){
+    Utils.hideMobileMenu();
+    if (num != 1){
+      $('.mo-navbar').addClass('mo-navbar--up');
+    }
     $.fn.fullpage.moveTo(num);
   }
 
-  handleChangeEmail(){
-    let email = this.refs.email.value;
-    this.setState({email});
-  }
-
-  handleChangePassword(){
-    let password = this.refs.password.value;
-    this.setState({password});
-  }
-
-  login(){
-    let email = this.refs.email.value;
-    let password = this.refs.password.value;
+  login(email, password){
     this.props.login(email, password);
   }
 
@@ -145,10 +135,15 @@ class Index extends Component {
     let userInfoHtml, userInfoHtmlMobile;
     if (isUserSignIn){
       userInfoHtml = (
-        <div className="mo-nav__item no-mobile-display"><a className="mo-nav__link" href="/users/logout">{locale.user.logout}</a></div>
+        <div className="mo-nav__item no-mobile-display mo-dropdown" data-menuanchor="logo-design-section">
+          <span className="user-info"><span className="glyphicon glyphicon-user white"></span>{currentUser.name}</span>
+          <div className="mo-dropdown__menu mo-dropdown__menu--right-aligned">
+             <div className="mo-dropdown__item"><a href="/users/logout">{locale.user.logout}</a></div>
+          </div>
+       </div>
       );
       userInfoHtmlMobile = (
-        <div className="mo-nav__item no-mobile-display"><a className="mo-nav__link" href="/users/logout">{locale.user.logout}</a></div>
+        <div className="mo-nav__item"><a className="mo-nav__link" href="/users/logout">{locale.user.logout}</a></div>
       );
     }
     else{
@@ -156,7 +151,7 @@ class Index extends Component {
         <div className="mo-nav__item no-mobile-display"><a className="mo-nav__link" href="#" onClick={this.handleLoginClick.bind(this)}>{locale.user.signIn}</a></div>
       );
       userInfoHtmlMobile = (
-        <div className="mo-nav__item no-mobile-display"><a className="mo-nav__link" href="#" onClick={this.handleLoginClick.bind(this)}>{locale.user.signIn}</a></div>
+        <div className="mo-nav__item"><a className="mo-nav__link" href="#" onClick={this.handleLoginClick.bind(this)}>{locale.user.signIn}</a></div>
       );
     }
     return(
@@ -165,42 +160,55 @@ class Index extends Component {
            <div className="mo-nav-mobile__mask"></div>
            <div className="mo-nav-mobile__content">
               <div className="mo-nav-mobile__menu-wrapper">
+                  <div>
+                    <span className="mdi-icon mdi-edwardxiao white"></span>
+                  </div>
+                  <br/>
                   {userInfoHtmlMobile}
-                  <ul className="mo-nav-mobile__menu mo-nav-mobile-menu mo-nav__menu">
-                    <li className="mo-nav-mobile-menu__item" data-menuanchor="home-section">
+                  <div className="mo-nav-mobile__menu mo-nav-mobile-menu mo-nav__menu">
+                    <div className="mo-nav-mobile-menu__item" data-menuanchor="home-section">
                       <a className="mo-nav-mobile-menu__link" href="#home-section" rel="nofollow" onClick={this.goToSection.bind(this, 1)}>{locale.nav.home}</a>
-                    </li>
-                    <li className="mo-nav-mobile-menu__item" data-menuanchor="logo-design-section">
+                      <div className="line"></div>
+                    </div>
+                    <div className="mo-nav-mobile-menu__item" data-menuanchor="logo-design-section">
                       <a className="mo-nav-mobile-menu__link" href="#" rel="nofollow" onClick={this.goToSection.bind(this, 2)}>{locale.nav.logoDesign}</a>
-                    </li>
-                    <li className="mo-nav-mobile-menu__item" data-menuanchor="graphic-design-section">
+                      <div className="line"></div>
+                    </div>
+                    <div className="mo-nav-mobile-menu__item" data-menuanchor="graphic-design-section">
                       <a className="mo-nav-mobile-menu__link" href="#" rel="nofollow" onClick={this.goToSection.bind(this, 3)}>{locale.nav.graphicDesign}</a>
-                    </li>
-                    <li className="mo-nav-mobile-menu__item" data-menuanchor="industrial-design-section">
+                      <div className="line"></div>
+                    </div>
+                    <div className="mo-nav-mobile-menu__item" data-menuanchor="industrial-design-section">
                       <a className="mo-nav-mobile-menu__link" href="#" rel="nofollow" onClick={this.goToSection.bind(this, 4)}>{locale.nav.industrialDesign}</a>
-                    </li>
-                    <li className="mo-nav-mobile-menu__item" data-menuanchor="web-design-section">
+                      <div className="line"></div>
+                    </div>
+                    <div className="mo-nav-mobile-menu__item" data-menuanchor="web-design-section">
                       <a className="mo-nav-mobile-menu__link" href="#" rel="nofollow" onClick={this.goToSection.bind(this, 5)}>{locale.nav.webDesign}</a>
-                    </li>
-                    <li className="mo-nav-mobile-menu__item" data-menuanchor="photograph-section">
+                      <div className="line"></div>
+                    </div>
+                    <div className="mo-nav-mobile-menu__item" data-menuanchor="photograph-section">
                       <a className="mo-nav-mobile-menu__link" href="#" rel="nofollow" onClick={this.goToSection.bind(this, 6)}>{locale.nav.photograph}</a>
-                    </li>
-                    <li className="mo-nav-mobile-menu__item" data-menuanchor="article-section">
+                      <div className="line"></div>
+                    </div>
+                    <div className="mo-nav-mobile-menu__item" data-menuanchor="article-section">
                       <a className="mo-nav-mobile-menu__link" href="#" rel="nofollow" onClick={this.goToSection.bind(this, 7)}>{locale.nav.article}</a>
-                    </li>
-                    <li className="mo-nav-mobile-menu__item" data-menuanchor="about-section">
+                      <div className="line"></div>
+                    </div>
+                    <div className="mo-nav-mobile-menu__item" data-menuanchor="about-section">
                       <a className="mo-nav-mobile-menu__link" href="#" rel="nofollow" onClick={this.goToSection.bind(this, 8)}>{locale.nav.about}</a>
-                    </li>
-                    <li className="mo-nav-mobile-menu__item" data-menuanchor="contact-section">
+                      <div className="line"></div>
+                    </div>
+                    <div className="mo-nav-mobile-menu__item" data-menuanchor="contact-section">
                       <a className="mo-nav-mobile-menu__link" href="#" rel="nofollow" onClick={this.goToSection.bind(this, 9)}>{locale.nav.contact}</a>
-                    </li>
-                  </ul>
+                      <div className="line"></div>
+                    </div>
+                  </div>
               </div>
            </div>
         </div>
         <div className="mo-navbar">
            <div className="mo-navbar__container">
-              <span className="show-mobile mdi-icon mdi-edwardxiao white mobile-menu-icon"></span>
+              <span className="show-mobile mdi-icon mdi-menu white mobile-menu-icon"></span>
               <a className="mo-navbar__brand" href="#">
                 <span className="mdi-icon mdi-edwardxiao main-logo white no-mobile"></span>
                 <span className="show-mobile main-logo">
@@ -248,9 +256,6 @@ class Index extends Component {
                 </div>
               </div>
               <div className="section logo-design-section" data-anchor="logo-design-section">
-                <input type="text" value={email} ref="email" onChange={this.handleChangeEmail.bind(this)} />
-                <input type="text" value={password} ref="password" onChange={this.handleChangePassword.bind(this)} />
-                <input type="button" onClick={this.login.bind(this)} />
               </div>
               <div className="section graphic-design-section" data-anchor="graphic-design-section">graphic-design-section</div>
               <div className="section industrial-design-section" data-anchor="industrial-design-section">industrial-design-section</div>
@@ -265,7 +270,13 @@ class Index extends Component {
         <div className="footer">
            <div className="container"></div>
         </div>
-        <Modal />
+        <LoginModal
+          titleText={locale.user.signIn}
+          cancelText={locale.operation.cancel}
+          emailText={locale.user.email}
+          passwordText={locale.user.password}
+          login={this.login.bind(this)}
+        />
       </div>
     );
   }

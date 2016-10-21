@@ -28,7 +28,7 @@ export function currentUser(currentUser = DEFAULT_STATE.currentUser, action) {
 
 export function isUserSignIn(isUserSignIn = DEFAULT_STATE.isUserSignIn, action) {
   switch (action.type) {
-    case ACTION.SET_IS_SIGHN_IN:
+    case ACTION.SET_IS_SIGN_IN:
       return action.isUserSignIn
     default:
       return isUserSignIn;
